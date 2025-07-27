@@ -1,14 +1,27 @@
+import { noteExercises } from "@/data/noteExercises";
+import LessonRow from "@/components/LessonRow";
+
 export default function Notes() {
-    return (
-        <div>
-            <h1 className="text-2xl font-bold mb-4">Notes Page</h1>
-            <p className="text-lg">This is the notes training page of the application.</p>
-            <p className="mt-2 text-gray-600">
-                You can add your notes training logic here.
-            </p>
-            <div className="mt-6">
-                {/* Additional content or components can be added here */}
-            </div>
-        </div>
-    )
+  const roadmap = [
+    {
+      id: "notes-beginner",
+      lessons: noteExercises.map((ex) => ({
+        id: ex.id,
+        title: ex.name,
+        status: "unlocked" as const, // still needs logic for locked/completed
+      })),
+    },
+  ];
+
+  return (
+    <div className="h-screen overflow-y-scroll p-8 bg-[#2C2C71] text-[#FFC0CB] space-y-16">
+      <h1 className="text-3xl font-bold text-center mb-8">
+        Note Training Roadmap
+      </h1>
+
+      {roadmap.map((section) => (
+        <LessonRow key={section.id} lessons={section.lessons} />
+      ))}
+    </div>
+  );
 }
