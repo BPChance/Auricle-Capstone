@@ -4,7 +4,7 @@ import LessonRow from "@/components/LessonRow";
 export default function Notes() {
   const roadmap = [
     {
-      id: "notes-beginner",
+      id: "intervals-beginner",
       lessons: intervalExercises.map((ex) => ({
         id: ex.id,
         title: ex.name,

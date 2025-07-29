@@ -1,5 +1,6 @@
 import Sidebar from "@/components/Sidebar";
 import "./globals.css";
+import { AuthProvider } from "@/components/AuthProvider";
 
 export default function RootLayout({
   children,
@@ -9,8 +10,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className="flex min-h-screen">
-        <Sidebar />
-        <main className="flex-1">{children}</main>
+        <AuthProvider>
+          <Sidebar />
+          <main className="flex-1">{children}</main>
+        </AuthProvider>
       </body>
     </html>
   );
