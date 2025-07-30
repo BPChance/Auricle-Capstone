@@ -6,7 +6,7 @@ type Props = {
   params: { id: string };
 };
 
-export default function ExercisePage({ params }: Props) {
+export default async function ExercisePage({ params }: Props) {
   const exercise = allExercises[params.id as keyof typeof allExercises];
 
   if (!exercise) return notFound();
