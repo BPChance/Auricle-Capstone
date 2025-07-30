@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import * as Tone from "tone";
 import Link from "next/link";
 import { AudioLines } from "lucide-react";
 import { Music } from "lucide-react";
@@ -37,6 +36,7 @@ export default function ExercisePlayer({ exercise }: Props) {
   const isCorrect = selected === step?.answer;
 
   const playNote = async () => {
+    const Tone = await import("tone");
     await Tone.start();
     const synth = new Tone.Synth().toDestination();
     if (step) {
@@ -57,6 +57,7 @@ export default function ExercisePlayer({ exercise }: Props) {
   };
 
   const handleOptionClick = async (opt: string) => {
+    const Tone = await import("tone");
     setSelected(opt);
     await Tone.start();
     const synth = new Tone.Synth().toDestination();
@@ -79,7 +80,7 @@ export default function ExercisePlayer({ exercise }: Props) {
 
   const playScale = async () => {
     if (!step?.scaleAudio) return;
-
+    const Tone = await import("tone");
     await Tone.start();
     const synth = new Tone.Synth().toDestination();
 
