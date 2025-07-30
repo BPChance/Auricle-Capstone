@@ -1,4 +1,4 @@
-import { chordExercises } from "./chordExercises";
+import { chordExercises } from "./ChordExercises";
 import { intervalExercises } from "./intervalExercises";
 import { noteExercises } from "./noteExercises";
 
