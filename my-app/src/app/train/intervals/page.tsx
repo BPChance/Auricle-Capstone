@@ -16,7 +16,7 @@ export default function Notes() {
   return (
     <div className="h-screen overflow-y-scroll p-8 bg-[#2C2C71] text-[#FFC0CB] space-y-16">
       <h1 className="text-3xl font-bold text-center mb-8">
-        Note Training Roadmap
+        Interval Training Roadmap
       </h1>
 
       {roadmap.map((section) => (
