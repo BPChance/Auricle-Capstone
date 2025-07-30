@@ -13,6 +13,7 @@ type ExerciseStep = {
   audio: string;
   options: string[];
   answer: string;
+  scaleAudio?: string[];
 };
 
 type Exercise = {
@@ -76,6 +77,18 @@ export default function ExercisePlayer({ exercise }: Props) {
     );
   }
 
+  const playScale = async () => {
+    if (!step?.scaleAudio) return;
+
+    await Tone.start();
+    const synth = new Tone.Synth().toDestination();
+
+    for (const note of step.scaleAudio) {
+      synth.triggerAttackRelease(note, "8n");
+      await new Promise((res) => setTimeout(res, 400));
+    }
+  };
+
   return (
     <div className="min-h-screen flex flex-col items-center justify-center bg-[#2C2C71] text-[#FFC0CB] px-4 py-8 space-y-8">
       <h2 className="text-2xl font-bold">{step.level}</h2>
@@ -84,6 +97,15 @@ export default function ExercisePlayer({ exercise }: Props) {
         <div className="w-20 h-20 border-2 border-[#FFC0CB] rounded-full flex items-center justify-center text-3xl bg-[#4848A1]">
           <Music className="text-[#FFC0CB] w-10 h-10 flex justify-center items-center mr-1" />
         </div>
+        {step.type === "scaleContext" && step.scaleAudio && (
+          <button
+            onClick={playScale}
+            className="flex items-center gap-2 text-sm font-semibold bg-[#2A2EBB] px-4 py-2 rounded-full"
+          >
+            Play Scale
+          </button>
+        )}
+
         <div
           onClick={playNote}
           className="flex items-center gap-3 cursor-pointer group"
