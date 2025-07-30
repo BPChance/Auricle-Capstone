@@ -1,0 +1,36 @@
+[
+  {
+    "id": "chord-1",
+    "name": "Major vs Minor (C)",
+    "difficulty": "beginner",
+    "category": "chords",
+    "unlockLevel": 1,
+    "steps": [
+      {
+        "level": "Remember",
+        "type": "multipleChoice",
+        "question": "Is this chord major or minor?",
+        "audio": "Cmaj",
+        "options": ["Major", "Minor"],
+        "answer": "Major"
+      }
+    ]
+  },
+  {
+    "id": "chord-2",
+    "name": "Chord Progressions I",
+    "difficulty": "beginner",
+    "category": "chords",
+    "unlockLevel": 2,
+    "steps": [
+      {
+        "level": "Apply",
+        "type": "multipleChoice",
+        "question": "What chord follows C in a I-IV-V progression?",
+        "audio": "Fmaj",
+        "options": ["Fmaj", "Gmaj", "Amin"],
+        "answer": "Fmaj"
+      }
+    ]
+  }
+]
