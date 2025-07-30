@@ -1,4 +1,4 @@
-import { chordExercises } from "@/data/chordExercises";
+import { chordExercises } from "@/data/ChordExercises";
 import LessonRow from "@/components/LessonRow";
 
 export default function Chords() {
