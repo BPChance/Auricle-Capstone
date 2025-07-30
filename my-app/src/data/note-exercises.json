@@ -1,0 +1,53 @@
+[
+  {
+    "id": "note-1",
+    "name": "Note Basics A",
+    "difficulty": "beginner",
+    "category": "notes",
+    "unlockLevel": 1,
+    "steps": [
+      {
+        "level": "Remember",
+        "type": "audioOnly",
+        "question": "Which note is this?",
+        "audio": "A4",
+        "options": ["A", "B", "C", "D"],
+        "answer": "A"
+      },
+      {
+        "level": "Remember",
+        "type": "audioOnly",
+        "question": "Which note is this?",
+        "audio": "C4",
+        "options": ["D", "C", "E", "F"],
+        "answer": "C"
+      }
+    ]
+  },
+  {
+    "id": "note-2",
+    "name": "Note Basics B",
+    "difficulty": "beginner",
+    "category": "notes",
+    "unlockLevel": 2,
+    "steps": [
+      {
+        "level": "Remember",
+        "type": "audioOnly",
+        "question": "Identify the note",
+        "audio": "G4",
+        "options": ["G", "A", "F", "E"],
+        "answer": "G"
+      },
+      {
+            "level": "Remember",
+            "type": "scaleContext",
+            "question": "Which note is this?",
+            "scaleAudio": ["C4", "D4", "E4", "F4", "G4", "A4", "B4"],
+            "audio": "E4",
+            "options": ["D", "E", "F", "G"],
+            "answer": "E"
+      }
+    ]
+  }
+]

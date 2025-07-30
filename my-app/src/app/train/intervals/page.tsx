@@ -1,14 +1,27 @@
-export default function Intervals() {
-    return (
-        <div>
-            <h1 className="text-2xl font-bold mb-4">Intervals Page</h1>
-            <p className="text-lg">This is the intervals training page of the application.</p>
-            <p className="mt-2 text-gray-600">
-                You can add your intervals training logic here.
-            </p>
-            <div className="mt-6">
-                {/* Additional content or components can be added here */}
-            </div>
-        </div>
-    )
+import { intervalExercises } from "@/data/intervalExercises";
+import LessonRow from "@/components/LessonRow";
+
+export default function Notes() {
+  const roadmap = [
+    {
+      id: "intervals-beginner",
+      lessons: intervalExercises.map((ex) => ({
+        id: ex.id,
+        title: ex.name,
+        status: "unlocked" as const, // still needs logic for locked/completed
+      })),
+    },
+  ];
+
+  return (
+    <div className="h-screen overflow-y-scroll p-8 bg-[#2C2C71] text-[#FFC0CB] space-y-16">
+      <h1 className="text-3xl font-bold text-center mb-8">
+        Interval Training Roadmap
+      </h1>
+
+      {roadmap.map((section) => (
+        <LessonRow key={section.id} lessons={section.lessons} />
+      ))}
+    </div>
+  );
 }
