@@ -3,11 +3,11 @@ import { notFound } from "next/navigation";
 import ExercisePlayer from "@/components/ExercisePlayer";
 
 type Props = {
-  params: { id: string };
+  params: Promise<{ id: string }>;
 };
 
-export default function ExercisePage({ params }: Props) {
-  const exercise = allExercises[params.id as keyof typeof allExercises];
+export default async function ExercisePage({ params }: Props) {
+  const exercise = allExercises[(await params).id as keyof typeof allExercises];
 
   if (!exercise) return notFound();
 
