@@ -12,7 +12,7 @@ export default function ProfilePage() {
             <label className="block mb-1">Name</label>
             <input
               type="text"
-              className="w-full bg-[#4848A1] border border-pink-200 rounded-lg py-2 px-4 outline-none"
+              className="w-full bg-[#4848A1] border-2 border-[#FFC0CB] rounded-lg py-2 px-4 outline-none"
             />
           </div>
 
@@ -20,7 +20,7 @@ export default function ProfilePage() {
             <label className="block mb-1">Username</label>
             <input
               type="text"
-              className="w-full bg-[#4848A1] border border-pink-200 rounded-lg py-2 px-4 outline-none"
+              className="w-full bg-[#4848A1] border-2 border-[#FFC0CB] rounded-lg py-2 px-4 outline-none"
             />
           </div>
 
@@ -28,7 +28,7 @@ export default function ProfilePage() {
             <label className="block mb-1">Email</label>
             <input
               type="email"
-              className="w-full bg-[#4848A1] border border-pink-200 rounded-lg py-2 px-4 outline-none"
+              className="w-full bg-[#4848A1] border-2 border-[#FFC0CB] rounded-lg py-2 px-4 outline-none"
             />
           </div>
 
@@ -38,14 +38,14 @@ export default function ProfilePage() {
               <label className="block mb-1">Current Password</label>
               <input
                 type="password"
-                className="w-full bg-[#4848A1] border border-pink-200 rounded-lg py-2 px-4 outline-none"
+                className="w-full bg-[#4848A1] border-2 border-[#FFC0CB] rounded-lg py-2 px-4 outline-none"
               />
             </div>
             <div className="flex-1">
               <label className="block mb-1">New Password</label>
               <input
                 type="password"
-                className="w-full bg-[#4848A1] border border-pink-200 rounded-lg py-2 px-4 outline-none"
+                className="w-full bg-[#4848A1] border-2 border-[#FFC0CB] rounded-lg py-2 px-4 outline-none"
               />
             </div>
           </div>
@@ -55,7 +55,7 @@ export default function ProfilePage() {
             <button
               type="button"
               disabled
-              className="w-full max-w-[200px] bg-[#474781] text-pink-200 border border-pink-200 rounded-lg px-6 py-2 opacity-50 cursor-not-allowed"
+              className="w-full max-w-[200px] bg-[#4848A1] border-2 border-[#FFC0CB] text-pink-200 rounded-lg px-6 py-2 opacity-50 cursor-not-allowed"
             >
               Save
             </button>

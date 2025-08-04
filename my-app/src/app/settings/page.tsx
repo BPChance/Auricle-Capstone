@@ -1,33 +1,32 @@
+import Link from "next/link";
+
 export default function SettingsPage() {
-    return (
-    <div className="flex min-h-screen bg-[#2a237f] text-white transition-colors duration-300">
-      <main className="flex flex-col justify-between flex-1 px-8 py-10">
-        {/* Centered Title + Buttons */}
-        <div className="flex-1 flex flex-col justify-start space-y-15 mt-20">
-          <h1 className="text-5xl font-bold text-center">Settings</h1>
-
-          <div className="w-full">
-            <div className="grid gap-10 w-full max-w-[600px] mx-auto">
-              <button className="w-full border bg-[#4848A1] border-pink-200 text-pink-200 py-3 rounded-full text-lg hover:bg-pink-200 hover:text-[#2a237f] transition">
-                Profile
-              </button>
-              <button className="w-full border bg-[#4848A1] border-pink-200 text-pink-200 py-3 rounded-full text-lg hover:bg-pink-200 hover:text-[#2a237f] transition">
-                Courses
-              </button>
-              <button className="w-full border bg-[#4848A1] border-pink-200 text-pink-200 py-3 rounded-full text-lg hover:bg-pink-200 hover:text-[#2a237f] transition">
-                Dark Mode
-              </button>
-            </div>
-          </div>
-        </div>
-
-        {/* Log Out Button */}
-        <div className="w-full max-w-[250px] mx-auto">
-          <button className="w-full mb-4 border bg-[#4848A1] border-pink-200 text-pink-200 py-3 px-6 rounded-full text-lg hover:bg-pink-200 hover:text-[#2a237f] transition">
-            Log Out
-          </button>
-        </div>
-      </main>
+  return (
+    <div className="bg-[#2C2C71] text-[#FFC0CB] min-h-screen p-8 flex flex-col">
+      {/* Centered Title + Buttons */}
+      <div className="flex flex-col gap-8 items-center pt-10">
+        <h1 className="font-bold text-2xl text-[#FFC0CB]">
+          Settings
+        </h1>
+        <Link
+          href="/profile_settings"
+          className="bg-[#4848A1] border-2 border-[#FFC0CB] rounded-full p-2 md:w-120 text-center text-[#FFC0CB] hover:border-[#4848A1] hover:bg-[#FFC0CB] hover:text-[#4848A1] transition-colors duration-200">
+          Profile
+        </Link>
+        <button className="bg-[#4848A1] border-2 border-[#FFC0CB] rounded-full p-2 md:w-120 text-center text-[#FFC0CB] hover:border-[#4848A1] hover:bg-[#FFC0CB] hover:text-[#4848A1] transition-colors duration-200">
+          Courses
+        </button>
+        <button className="bg-[#4848A1] border-2 border-[#FFC0CB] rounded-full p-2 md:w-120 text-center text-[#FFC0CB] hover:border-[#4848A1] hover:bg-[#FFC0CB] hover:text-[#4848A1] transition-colors duration-200">
+          Dark Mode
+        </button>
+      </div>
+      
+      {/* Log Out Button - positioned at bottom */}
+      <div className="flex justify-center pb-8 mt-auto">
+        <button className="bg-[#4848A1] border-2 border-[#FFC0CB] text-[#FFC0CB] py-3 px-6 rounded-full text-lg hover:bg-[#FFC0CB] hover:text-[#2a237f] transition-colors duration-200">
+          Log Out
+        </button>
+      </div>
     </div>
   );
 }
