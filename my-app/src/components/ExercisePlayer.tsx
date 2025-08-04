@@ -10,6 +10,7 @@ type ExerciseStep = {
   type: string;
   question: string;
   audio: string;
+  audio2?: string;
   options: string[];
   answer: string;
   scaleAudio?: string[];
@@ -39,8 +40,25 @@ export default function ExercisePlayer({ exercise }: Props) {
     const Tone = await import("tone");
     await Tone.start();
     const synth = new Tone.Synth().toDestination();
+
     if (step) {
-      synth.triggerAttackRelease(step.audio, "8n");
+      const notes = step.audio.split(",");
+      for (const note of notes) {
+        synth.triggerAttackRelease(note, "8n");
+        await new Promise((res) => setTimeout(res, 500));
+      }
+    }
+  };
+
+  const playDualAudio = async (audio: string) => {
+    const Tone = await import("tone");
+    await Tone.start();
+    const synth = new Tone.Synth().toDestination();
+
+    const notes = audio.split(",");
+    for (const note of notes) {
+      synth.triggerAttackRelease(note, "8n");
+      await new Promise((res) => setTimeout(res, 500));
     }
   };
 
@@ -60,8 +78,13 @@ export default function ExercisePlayer({ exercise }: Props) {
     const Tone = await import("tone");
     setSelected(opt);
     await Tone.start();
+
     const synth = new Tone.Synth().toDestination();
-    synth.triggerAttackRelease(opt + "4", "8n");
+
+    // play only if opt is a valid note
+    if (/^[A-G]#?$/.test(opt)) {
+      synth.triggerAttackRelease(opt + "4", "8n");
+    }
   };
 
   if (!step) {
@@ -99,23 +122,43 @@ export default function ExercisePlayer({ exercise }: Props) {
           <Music className="text-[#FFC0CB] w-10 h-10 flex justify-center items-center mr-1" />
         </div>
         {step.type === "scaleContext" && step.scaleAudio && (
-          <button
-            onClick={playScale}
-            className="flex items-center gap-2 text-sm font-semibold bg-[#2A2EBB] px-4 py-2 rounded-full"
-          >
-            Play Scale
-          </button>
+          <div className="flex flex-row items-center gap-3">
+            <button
+              onClick={playScale}
+              className="flex items-center gap-2 text-sm font-semibold bg-[#4848A1] px-4 py-2 rounded-lg"
+            >
+              Play Scale
+            </button>
+            <div>{step.scaleAudio}</div>
+          </div>
         )}
 
-        <div
-          onClick={playNote}
-          className="flex items-center gap-3 cursor-pointer group"
-        >
-          <div className="w-12 h-10 rounded-md bg-[#4848A1] flex items-center justify-center transition-colors group-hover:bg-[#1C1C3A]">
-            <AudioLines className="text-[#FFC0CB]" />
+        {step.type === "dualAudio" ? (
+          <div className="flex gap-4">
+            <button
+              onClick={() => playDualAudio(step.audio)}
+              className="flex items-center gap-2 text-sm font-semibold bg-[#4848A1] px-4 py-2 rounded-lg"
+            >
+              1st
+            </button>
+            <button
+              onClick={() => playDualAudio(step.audio2!)}
+              className="flex items-center gap-2 text-sm font-semibold bg-[#4848A1] px-4 py-2 rounded-lg"
+            >
+              2nd
+            </button>
           </div>
-          <span className="font-semibold text-sm">Play audio</span>
-        </div>
+        ) : (
+          <div
+            onClick={playNote}
+            className="flex items-center gap-3 cursor-pointer group"
+          >
+            <div className="w-12 h-10 rounded-md bg-[#4848A1] flex items-center justify-center transition-colors group-hover:bg-[#1C1C3A]">
+              <AudioLines className="text-[#FFC0CB]" />
+            </div>
+            <span className="font-semibold text-sm">Play audio</span>
+          </div>
+        )}
 
         <p className="text-lg font-medium text-center mt-2">{step.question}</p>
       </div>
