@@ -1,23 +1,25 @@
 [
   {
     "id": "note-1",
-    "name": "Note Basics A",
+    "name": "Remember",
     "difficulty": "beginner",
     "category": "notes",
     "unlockLevel": 1,
     "steps": [
       {
-        "level": "Remember",
-        "type": "audioOnly",
+        "level": "Identify",
+        "type": "scaleContext",
         "question": "Which note is this?",
+        "scaleAudio": ["C4", "D4", "E4", "F4", "G4", "A4", "B4"],
         "audio": "A4",
         "options": ["A", "B", "C", "D"],
         "answer": "A"
       },
       {
-        "level": "Remember",
-        "type": "audioOnly",
+        "level": "Identify",
+        "type": "scaleContext",
         "question": "Which note is this?",
+        "scaleAudio": ["C4", "D4", "E4", "F4", "G4", "A4", "B4"],
         "audio": "C4",
         "options": ["D", "C", "E", "F"],
         "answer": "C"
@@ -26,13 +28,13 @@
   },
   {
     "id": "note-2",
-    "name": "Note Basics B",
+    "name": "Remember",
     "difficulty": "beginner",
     "category": "notes",
     "unlockLevel": 2,
     "steps": [
       {
-        "level": "Remember",
+        "level": "Match",
         "type": "audioOnly",
         "question": "Identify the note",
         "audio": "G4",
@@ -40,13 +42,264 @@
         "answer": "G"
       },
       {
-            "level": "Remember",
-            "type": "scaleContext",
-            "question": "Which note is this?",
-            "scaleAudio": ["C4", "D4", "E4", "F4", "G4", "A4", "B4"],
-            "audio": "E4",
-            "options": ["D", "E", "F", "G"],
-            "answer": "E"
+        "level": "Match",
+        "type": "audioOnly",
+        "question": "Which note is this?",
+        "audio": "E4",
+        "options": ["D", "E", "F", "G"],
+        "answer": "E"
+      }
+    ]
+  },
+  {
+    "id": "note-3",
+    "name": "Remember",
+    "difficulty": "beginner",
+    "category": "notes",
+    "unlockLevel": 3,
+    "steps": [
+      {
+        "level": "Recall",
+        "type": "audioOnly",
+        "question": "Which note is this?",
+        "audio": "B4",
+        "options": ["A", "B", "C", "D"],
+        "answer": "B"
+      },
+      {
+        "level": "Recall",
+        "type": "audioOnly",
+        "question": "Which note is this?",
+        "audio": "C4",
+        "options": ["B", "C", "D", "E"],
+        "answer": "C"
+      }
+    ]
+  },
+  {
+    "id": "note-4",
+    "name": "Understand",
+    "difficulty": "beginner",
+    "category": "notes",
+    "unlockLevel": 4,
+    "steps": [
+      {
+        "level": "Compare",
+        "type": "audioOnly",
+        "question": "Which note is higher?",
+        "audio": "A4,B4",
+        "options": ["1st", "2nd"],
+        "answer": "2nd"
+      },
+      {
+        "level": "Compare",
+        "type": "audioOnly",
+        "question": "Which note is lower?",
+        "audio": "E4,D4",
+        "options": ["1st", "2nd"],
+        "answer": "2nd"
+      }
+    ]
+  },
+  {
+    "id": "note-5",
+    "name": "Understand",
+    "difficulty": "beginner",
+    "category": "notes",
+    "unlockLevel": 5,
+    "steps": [
+      {
+        "level": "Relationship",
+        "type": "audioOnly",
+        "question": "Is the second note the same as the first note?",
+        "audio": "F#4,D4",
+        "options": ["Yes", "No"],
+        "answer": "No"
+      },
+      {
+        "level": "Relationship",
+        "type": "audioOnly",
+        "question": "Is the second note the same as the first note? Hint: Some notes may be an octave apart.",
+        "audio": "C4,C5",
+        "options": ["Yes", "No"],
+        "answer": "Yes"
+      }
+    ]
+  },
+  {
+    "id": "note-6",
+    "name": "Understand",
+    "difficulty": "beginner",
+    "category": "notes",
+    "unlockLevel": 6,
+    "steps": [
+      {
+        "level": "Direction",
+        "type": "audioOnly",
+        "question": "Is the scale going up or down in pitch?",
+        "audio": "C4,D4,E4,F4,G4,A4,B4",
+        "options": ["Up", "Down"],
+        "answer": "Up"
+      },
+      {
+        "level": "Direction",
+        "type": "audioOnly",
+        "question": "Is the scale going up or down in pitch?",
+        "audio": "B4,A4,G4,F4,E4,D4,C4",
+        "options": ["Up", "Down"],
+        "answer": "Down"
+      }
+    ]
+  },
+  {
+    "id": "note-7",
+    "name": "Apply",
+    "difficulty": "beginner",
+    "category": "notes",
+    "unlockLevel": 7,
+    "steps": [
+      {
+        "level": "Resolution",
+        "type": "audioOnly",
+        "question": "Which note did the melody resolve to?",
+        "audio": "C4,C4,G4,G4,A4,A4,G4",
+        "options": ["G", "C"],
+        "answer": "G"
+      },
+      {
+        "level": "Resolution",
+        "type": "audioOnly",
+        "question": "Which note did the melody resolve to?",
+        "audio": "C4,C4,G4,G4,A4,A4,G4",
+        "options": ["G", "C"],
+        "answer": "G"
+      }
+    ]
+  },
+  {
+    "id": "note-8",
+    "name": "Analyze",
+    "difficulty": "beginner",
+    "category": "notes",
+    "unlockLevel": 8,
+    "steps": [
+      {
+        "level": "Deconstructing",
+        "type": "audioOnly",
+        "question": "Is the scale Major or minor?",
+        "audio": "C4,D4,E4,F4,G4,A4,B4",
+        "options": ["Major", "Minor"],
+        "answer": "Major"
+      },
+      {
+        "level": "Deconstructing",
+        "type": "audioOnly",
+        "question": "Which note did the melody resolve to? Hint: Listen to the 3rd, 6th, and 7th notes.",
+        "audio": "A3,B3,C4,D4,E4,F4,G4,A4",
+        "options": ["Major", "Minor"],
+        "answer": "Minor"
+      }
+    ]
+  },
+  {
+    "id": "note-9",
+    "name": "Analyze",
+    "difficulty": "beginner",
+    "category": "notes",
+    "unlockLevel": 9,
+    "steps": [
+      {
+        "level": "Deducing",
+        "type": "audioOnly",
+        "question": "Which note in the sequence was played first?",
+        "audio": "E4,G4,B4,C4",
+        "options": ["C", "E", "G", "B"],
+        "answer": "E"
+      },
+      {
+        "level": "Deducing",
+        "type": "audioOnly",
+        "question": "Which note in the sequence was played twice?",
+        "audio": "C4,E4,G4,B4,C4",
+        "options": ["C", "E", "G", "B"],
+        "answer": "C"
+      }
+    ]
+  },
+  {
+    "id": "note-10",
+    "name": "Evaluate",
+    "difficulty": "beginner",
+    "category": "notes",
+    "unlockLevel": 10,
+    "steps": [
+      {
+        "level": "Assessing",
+        "type": "dualAudio",
+        "question": "Which resolution sounds more natural?",
+        "audio": "C4,C4,G4,G4,A4,A4,B4",
+        "audio2": "C4,C4,G4,G4,A4,A4,G4",
+        "options": ["1st", "2nd"],
+        "answer": "2nd"
+      },
+      {
+        "level": "Assessing",
+        "type": "audioOnly",
+        "question": "Which resolution sounds more natural?",
+        "audio": "C4,C4,G4,G4,A4,A4,B4",
+        "audio2": "C4,C4,G4,G4,A4,A4,G4",
+        "options": ["1st", "2nd"],
+        "answer": "2nd"
+      }
+    ]
+  },
+  {
+    "id": "note-11",
+    "name": "Create",
+    "difficulty": "beginner",
+    "category": "notes",
+    "unlockLevel": 11,
+    "steps": [
+      {
+        "level": "Compose",
+        "type": "audioOnly",
+        "question": "Which note completes the melody?",
+        "audio": "A4,G4,F4,G4,A4,A4",
+        "options": ["F", "A", "C#", "D"],
+        "answer": "A"
+      },
+      {
+        "level": "Compose",
+        "type": "audioOnly",
+        "question": "Which note completes the melody?",
+        "audio": "C4,C4,G4,G4,A4,A4",
+        "options": ["C", "E", "G", "A"],
+        "answer": "G"
+      }
+    ]
+  },
+  {
+    "id": "note-12",
+    "name": "Create",
+    "difficulty": "beginner",
+    "category": "notes",
+    "unlockLevel": 12,
+    "steps": [
+      {
+        "level": "Compose",
+        "type": "audioOnly",
+        "question": "Which note comes next if the pattern continues?",
+        "audio": "A3,B3,C4,D4,E4,F4",
+        "options": ["F", "A", "G", "D"],
+        "answer": "G"
+      },
+      {
+        "level": "Compose",
+        "type": "audioOnly",
+        "question": "Which note comes next if the pattern continues?",
+        "audio": "C4,D4,E4,F4,G4,A4",
+        "options": ["C", "B", "G", "A"],
+        "answer": "B"
       }
     ]
   }
