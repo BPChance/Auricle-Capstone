@@ -21,7 +21,7 @@ export default function SettingsPage() {
         </button>
       </div>
       
-      {/* Log Out Button - positioned at bottom */}
+      {/* Log Out Button*/}
       <div className="flex justify-center pb-8 mt-auto">
         <button className="bg-[#4848A1] border-2 border-[#FFC0CB] text-[#FFC0CB] py-3 px-6 rounded-full text-lg hover:bg-[#FFC0CB] hover:text-[#2a237f] transition-colors duration-200">
           Log Out
