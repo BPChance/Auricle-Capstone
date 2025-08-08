@@ -12,7 +12,7 @@ type Props = {
 
 export default function LessonRow({ lessons }: Props) {
   return (
-    <div className="flex justify-center gap-6">
+    <div className="flex justify-center flex-wrap gap-6">
       {lessons.map((lesson) => (
         <LessonNode
           key={lesson.id}
