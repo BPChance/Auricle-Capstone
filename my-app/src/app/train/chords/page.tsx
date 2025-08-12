@@ -1,17 +1,47 @@
+"use client";
+
 import { chordExercises } from "@/data/ChordExercises";
 import LessonRow from "@/components/LessonRow";
+import LoadingSpinner from "@/components/LoadingSpinner";
+import ErrorMessage from "@/components/ErrorMessage";
+import { useProgress } from "@/hooks/useProgress";
+import { useEffect, useState } from "react";
+
+type Lesson = {
+  id: string;
+  title: string;
+  status: "locked" | "unlocked" | "completed";
+};
 
 export default function Chords() {
-  const roadmap = [
-    {
-      id: "chords-beginner",
-      lessons: chordExercises.map((ex) => ({
-        id: ex.id,
-        title: ex.name,
-        status: "unlocked" as const, // still needs logic for locked/completed
-      })),
-    },
-  ];
+  const { progress, loading, error } = useProgress("chords");
+  const [lessons, setLessons] = useState<Lesson[]>([]);
+
+  useEffect(() => {
+    if (!loading && progress) {
+      const mappedLessons: Lesson[] = chordExercises.map((exercise) => {
+        const exerciseProgress = progress.find(p => p.exercise_id === exercise.id);
+        
+        let status: "locked" | "unlocked" | "completed" = "locked";
+        
+        if (exerciseProgress?.status === "completed") {
+          status = "completed";
+        } else if (exerciseProgress?.status === "unlocked" || exerciseProgress?.status === "in_progress") {
+          status = "unlocked";
+        }
+        
+        return {
+          id: exercise.id,
+          title: exercise.name,
+          status: status,
+        };
+      });
+      setLessons(mappedLessons);
+    }
+  }, [progress, loading]);
+
+  if (loading) return <LoadingSpinner message="Loading exercises..." />;
+  if (error) return <ErrorMessage message="Error loading exercises" />;
 
   return (
     <div className="h-screen overflow-y-scroll p-8 bg-[#2C2C71] text-[#FFC0CB] space-y-16">
@@ -19,9 +49,7 @@ export default function Chords() {
         Chord Training Roadmap
       </h1>
 
-      {roadmap.map((section) => (
-        <LessonRow key={section.id} lessons={section.lessons} />
-      ))}
+      <LessonRow lessons={lessons} />
     </div>
   );
 }

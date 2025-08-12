@@ -1,35 +1,286 @@
 [
   {
-    "id": "chord-1",
-    "name": "Major vs Minor (C)",
+    "id": "interval-1",
+    "name": "Remember",
     "difficulty": "beginner",
-    "category": "chords",
+    "category": "intervals",
     "unlockLevel": 1,
     "steps": [
       {
-        "level": "Remember",
-        "type": "multipleChoice",
-        "question": "Which interval is greater?",
-        "audio": "C4",
-        "options": ["C", "D"],
+        "level": "Indentify",
+        "type": "scaleContext",
+        "question": "What interval is this?",
+        "scaleAudio": ["C4", "D4", "E4", "F4", "G4", "A4", "B4"],
+        "audio": "C4,D4",
+        "options": ["Major 2nd", "Perfect 5th"],
+        "answer": "Major 2nd"
+      },
+      {
+        "level": "Indentify",
+        "type": "scaleContext",
+        "question": "What interval is this?",
+        "scaleAudio": ["C4", "D4", "E4", "F4", "G4", "A4", "B4"],
+        "audio": "C4,G4",
+        "options": ["Major 3rd", "Perfect 5th"],
+        "answer": "Perfect 5th"
+      }
+    ]
+  },
+  {
+    "id": "interval-2",
+    "name": "Remember",
+    "difficulty": "beginner",
+    "category": "intervals",
+    "unlockLevel": 2,
+    "steps": [
+      {
+        "level": "Recall",
+        "type": "audioOnly",
+        "question": "Is this interval Major or minor?",
+        "audio": "C4,E4",
+        "options": ["Major", "Minor"],
+        "answer": "Major"
+      },
+      {
+        "level": "Recall",
+        "type": "audioOnly",
+        "question": "Is this interval Major or minor?",
+        "audio": "C4,D#4",
+        "options": ["Major", "Minor"],
+        "answer": "Minor"
+      }
+    ]
+  },
+  {
+    "id": "interval-3",
+    "name": "Remember",
+    "difficulty": "beginner",
+    "category": "intervals",
+    "unlockLevel": 3,
+    "steps": [
+      {
+        "level": "Matching",
+        "type": "audioOnly",
+        "question": "Which interval matches the audio?",
+        "audio": "C4,E4",
+        "options": ["Major 3rd", "Minor 3rd"],
+        "answer": "Major 3rd"
+      },
+      {
+        "level": "Matching",
+        "type": "audioOnly",
+        "question": "Which interval matches the audio?",
+        "audio": "C4,F4",
+        "options": ["Perfect 5th", "Perfect 4th"],
+        "answer": "Perfect 4th"
+      }
+    ]
+  },
+  {
+    "id": "interval-4",
+    "name": "Understand",
+    "difficulty": "beginner",
+    "category": "intervals",
+    "unlockLevel": 4,
+    "steps": [
+      {
+        "level": "Contrasting",
+        "type": "dualAudio",
+        "question": "Which interval is larger?",
+        "audio": "C4,F4",
+        "audio2": "C4,D#4",
+        "options": ["1st", "2nd"],
+        "answer": "1st"
+      },
+      {
+        "level": "Contrasting",
+        "type": "dualAudio",
+        "question": "Which interval is larger?",
+        "audio": "A4,F4",
+        "audio2": "A4,C4",
+        "options": ["1st", "2nd"],
+        "answer": "1st"
+      }
+    ]
+  },
+  {
+    "id": "interval-5",
+    "name": "Understand",
+    "difficulty": "beginner",
+    "category": "intervals",
+    "unlockLevel": 5,
+    "steps": [
+      {
+        "level": "Interpreting",
+        "type": "audioOnly",
+        "question": "Is this an ascending or descending interval?",
+        "audio": "C4,F4",
+        "options": ["Ascending", "Descending"],
+        "answer": "Ascending"
+      },
+      {
+        "level": "Interpreting",
+        "type": "audioOnly",
+        "question": "Is this an ascending or descending interval?",
+        "audio": "F4,D4",
+        "options": ["Ascending", "Descending"],
+        "answer": "Descending"
+      }
+    ]
+  },
+  {
+    "id": "interval-6",
+    "name": "Apply",
+    "difficulty": "beginner",
+    "category": "intervals",
+    "unlockLevel": 6,
+    "steps": [
+      {
+        "level": "Executing",
+        "type": "audioOnly",
+        "question": "First note is a C, the following note is a Maj 3rd, what is the following note?",
+        "audio": "C4,E4",
+        "options": ["A", "F", "E", "D"],
+        "answer": "E"
+      },
+      {
+        "level": "Executing",
+        "type": "audioOnly",
+        "question": "First note is a G, the following note is a perfect 4th, what is the following note?",
+        "audio": "G4,C4",
+        "options": ["B", "C", "A", "D"],
         "answer": "C"
       }
     ]
   },
   {
-    "id": "chord-2",
-    "name": "Chord Progressions I",
+    "id": "interval-7",
+    "name": "Apply",
     "difficulty": "beginner",
-    "category": "chords",
-    "unlockLevel": 2,
+    "category": "intervals",
+    "unlockLevel": 7,
     "steps": [
       {
-        "level": "Apply",
-        "type": "multipleChoice",
-        "question": "What chord follows C in a I-IV-V progression?",
-        "audio": "F4",
-        "options": ["Fmaj", "Gmaj", "Amin"],
-        "answer": "Fmaj"
+        "level": "Implementing",
+        "type": "audioOnly",
+        "question": "Which note completes the perfect 5th starting from G?",
+        "audio": "G4,D4",
+        "options": ["A", "E", "F", "D"],
+        "answer": "D"
+      },
+      {
+        "level": "Implementing",
+        "type": "audioOnly",
+        "question": "Which note completes the minor 3rd starting from A?",
+        "audio": "A4,C4",
+        "options": ["G", "C", "D", "F"],
+        "answer": "C"
+      }
+    ]
+  },
+  {
+    "id": "interval-8",
+    "name": "Analyze",
+    "difficulty": "beginner",
+    "category": "intervals",
+    "unlockLevel": 8,
+    "steps": [
+      {
+        "level": "Organizing",
+        "type": "dualAudio",
+        "question": "Which of these intervals are Major intervals?",
+        "audio": "C4,E4",
+        "audio2": "C4,D#4",
+        "options": ["1st", "2nd"],
+        "answer": "1st"
+      },
+      {
+        "level": "Organizing",
+        "type": "dualAudio",
+        "question": "Which of these intervals are Major intervals?",
+        "audio": "A4,C4",
+        "audio2": "D4,F#4",
+        "options": ["1st", "2nd"],
+        "answer": "2nd"
+      }
+    ]
+  },
+  {
+    "id": "interval-9",
+    "name": "Analyze",
+    "difficulty": "beginner",
+    "category": "intervals",
+    "unlockLevel": 9,
+    "steps": [
+      {
+        "level": "Organizing",
+        "type": "dualAudio",
+        "question": "Which of these intervals are Minor intervals?",
+        "audio": "C4,E4",
+        "audio2": "C4,D#4",
+        "options": ["1st", "2nd"],
+        "answer": "2nd"
+      },
+      {
+        "level": "Organizing",
+        "type": "dualAudio",
+        "question": "Which of these intervals are Minor intervals?",
+        "audio": "A4,C4",
+        "audio2": "D4,F#4",
+        "options": ["1st", "2nd"],
+        "answer": "1st"
+      }
+    ]
+  },
+  {
+    "id": "interval-10",
+    "name": "Evaluate",
+    "difficulty": "beginner",
+    "category": "intervals",
+    "unlockLevel": 10,
+    "steps": [
+      {
+        "level": "Justifying",
+        "type": "dualAudio",
+        "question": "Which interval resolves the tension?",
+        "audio": "C4,D4,E4,F4,B3",
+        "audio2": "C4,D4,E4,F4,C4",
+        "options": ["1st", "2nd"],
+        "answer": "2nd"
+      },
+      {
+        "level": "Justifying",
+        "type": "dualAudio",
+        "question": "Which interval resolves the tension?",
+        "audio": "G4,A4,B4,C5,F#4",
+        "audio2": "G4,A4,B4,C5,G4",
+        "options": ["1st", "2nd"],
+        "answer": "2nd"
+      }
+    ]
+  },
+  {
+    "id": "interval-11",
+    "name": "Create",
+    "difficulty": "beginner",
+    "category": "intervals",
+    "unlockLevel": 11,
+    "steps": [
+      {
+        "level": "Producing",
+        "type": "audioOnly",
+        "question": "Starting with a C, which note would continute the melody with a Major 3rd?",
+        "audio": "C4",
+        "options": ["A", "D", "E", "F"],
+        "answer": "E"
+      },
+      {
+        "level": "Producing",
+        "type": "audioOnly",
+        "question": "Starting with a B, which note would continute the melody with a Perfect 5th?",
+        "audio": "B",
+        "options": ["F#", "G", "A", "C#"],
+        "answer": "F#"
       }
     ]
   }

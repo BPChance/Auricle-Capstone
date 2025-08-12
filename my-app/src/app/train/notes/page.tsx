@@ -1,15 +1,52 @@
+"use client";
+
 import { noteExercises } from "@/data/noteExercises";
 import LessonRow from "@/components/LessonRow";
+import LoadingSpinner from "@/components/LoadingSpinner";
+import ErrorMessage from "@/components/ErrorMessage";
+import { useProgress } from "@/hooks/useProgress";
+import { useEffect, useState } from "react";
+
+type Lesson = {
+  id: string;
+  title: string;
+  status: "locked" | "unlocked" | "completed";
+};
 
 export default function Notes() {
+  const { progress, loading, error } = useProgress("notes");
+  const [lessons, setLessons] = useState<Lesson[]>([]);
+
+  useEffect(() => {
+    if (!loading && progress) {
+      const mappedLessons: Lesson[] = noteExercises.map((exercise) => {
+        const exerciseProgress = progress.find(p => p.exercise_id === exercise.id);
+        
+        let status: "locked" | "unlocked" | "completed" = "locked";
+        
+        if (exerciseProgress?.status === "completed") {
+          status = "completed";
+        } else if (exerciseProgress?.status === "unlocked" || exerciseProgress?.status === "in_progress") {
+          status = "unlocked";
+        }
+        
+        return {
+          id: exercise.id,
+          title: exercise.name,
+          status: status,
+        };
+      });
+      setLessons(mappedLessons);
+    }
+  }, [progress, loading]);
+
+  if (loading) return <LoadingSpinner message="Loading exercises..." />;
+  if (error) return <ErrorMessage message="Error loading exercises" />;
+
   const roadmap = [
     {
       id: "notes-beginner",
-      lessons: noteExercises.map((ex) => ({
-        id: ex.id,
-        title: ex.name,
-        status: "unlocked" as const, // still needs logic for locked/completed
-      })),
+      lessons: lessons,
     },
   ];
 

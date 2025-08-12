@@ -12,14 +12,20 @@ type Props = {
 
 export default function LessonRow({ lessons }: Props) {
   return (
-    <div className="flex justify-center gap-6">
-      {lessons.map((lesson) => (
-        <LessonNode
+    <div className="flex flex-col gap-8">
+      {lessons.map((lesson, index) => (
+        <div
           key={lesson.id}
-          id={lesson.id}
-          title={lesson.title}
-          status={lesson.status}
-        />
+          className={`flex w-full justify-center ${
+            index % 2 === 0 ? "pl-32" : "pr-32"
+          }`}
+        >
+          <LessonNode
+            id={lesson.id}
+            title={lesson.title}
+            status={lesson.status}
+          />
+        </div>
       ))}
     </div>
   );

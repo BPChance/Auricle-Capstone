@@ -11,14 +11,13 @@ type Props = {
 
 export default function LessonNode({ id, title, status }: Props) {
   const router = useRouter();
+  const isLocked = status === "locked";
 
   const handleClick = () => {
-    if (status !== "locked") {
+    if (!isLocked) {
       router.push(`/exercise/${id}`);
     }
   };
-
-  const isLocked = status === "locked";
 
   return (
     <div
@@ -26,12 +25,13 @@ export default function LessonNode({ id, title, status }: Props) {
       onClick={handleClick}
     >
       <div
-        className={`w-20 h-20 flex items-center justify-center rounded-full 
-        shadow-md transition duration-200 border-2 border-[#FFC0CB]
+        className={`w-24 h-24 flex items-center justify-center rounded-full text-xl font-bold
+        border-2 border-[#FFC0CB] transition-all duration-200 ease-in-out
+        shadow-lg hover:shadow-[0_0_20px_4px_rgba(255,192,203,0.4)]
         ${
           isLocked
             ? "bg-gray-600 text-white cursor-not-allowed"
-            : "bg-[#4848A1] text-[#FFC0CB] hover:bg-[#5a5ac1] cursor-pointer"
+            : "bg-gradient-to-br from-[#5a5ac1] to-[#3a3a90] text-[#FFC0CB] cursor-pointer hover:scale-105"
         }`}
       >
         {isLocked ? <Lock className="w-6 h-6" /> : title[0]}
