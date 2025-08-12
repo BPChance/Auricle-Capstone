@@ -10,20 +10,20 @@ export default function StatisticsCard({
   streak,
 }: StatisticsCardProps) {
   return (
-    <div className="w-full max-w-xs rounded-2xl bg-[#1C1C3A] text-[#FFC0CB] p-4 shadow-md space-y-4">
-      <h2 className="text-center text-lg font-bold">Your Stats</h2>
+    <div className="w-full space-y-4">
+      <h2 className="text-sm text-gray-400">Statistics</h2>
       <div className="grid grid-cols-3 gap-4">
-        <div className="flex flex-col items-center justify-center bg-[#2C2C71] rounded-xl p-4">
-          <span className="text-2xl font-bold">{accuracy}%</span>
-          <span className="text-sm">Accuracy</span>
+        <div className="bg-[#4848A1] rounded-lg p-6 text-center">
+          <div className="text-3xl font-bold text-white">{accuracy}%</div>
+          <div className="text-xs text-gray-300 mt-1">Accuracy</div>
         </div>
-        <div className="flex flex-col items-center justify-center bg-[#2C2C71] rounded-xl p-4">
-          <span className="text-2xl font-bold">{levelsCompleted}</span>
-          <span className="text-sm">Levels</span>
+        <div className="bg-[#4848A1] rounded-lg p-6 text-center">
+          <div className="text-3xl font-bold text-white">{streak}</div>
+          <div className="text-xs text-gray-300 mt-1">Daily Streak</div>
         </div>
-        <div className="flex flex-col items-center justify-center bg-[#2C2C71] rounded-xl p-4">
-          <span className="text-2xl font-bold">{streak}</span>
-          <span className="text-sm">Streak</span>
+        <div className="bg-[#4848A1] rounded-lg p-6 text-center">
+          <div className="text-3xl font-bold text-white">{levelsCompleted}</div>
+          <div className="text-xs text-gray-300 mt-1">Current Level</div>
         </div>
       </div>
     </div>
