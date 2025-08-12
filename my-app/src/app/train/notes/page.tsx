@@ -1,34 +1,52 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import { useAuth } from "@/components/AuthProvider";
-import { fetchUserStats } from "@/lib/data";
 import { noteExercises } from "@/data/noteExercises";
 import LessonRow from "@/components/LessonRow";
-import StatisticsCard from "@/components/StatisticsCard";
+import LoadingSpinner from "@/components/LoadingSpinner";
+import ErrorMessage from "@/components/ErrorMessage";
+import { useProgress } from "@/hooks/useProgress";
+import { useEffect, useState } from "react";
+
+type Lesson = {
+  id: string;
+  title: string;
+  status: "locked" | "unlocked" | "completed";
+};
 
 export default function Notes() {
-  const { session } = useAuth();
-  const [stats, setStats] = useState<{
-    accuracy: number;
-    levels_completed: number;
-    streak: number;
-  } | null>(null);
+  const { progress, loading, error } = useProgress("notes");
+  const [lessons, setLessons] = useState<Lesson[]>([]);
 
   useEffect(() => {
-    if (session?.user?.id) {
-      fetchUserStats(session.user.id).then(setStats);
+    if (!loading && progress) {
+      const mappedLessons: Lesson[] = noteExercises.map((exercise) => {
+        const exerciseProgress = progress.find(p => p.exercise_id === exercise.id);
+        
+        let status: "locked" | "unlocked" | "completed" = "locked";
+        
+        if (exerciseProgress?.status === "completed") {
+          status = "completed";
+        } else if (exerciseProgress?.status === "unlocked" || exerciseProgress?.status === "in_progress") {
+          status = "unlocked";
+        }
+        
+        return {
+          id: exercise.id,
+          title: exercise.name,
+          status: status,
+        };
+      });
+      setLessons(mappedLessons);
     }
-  }, [session]);
+  }, [progress, loading]);
+
+  if (loading) return <LoadingSpinner message="Loading exercises..." />;
+  if (error) return <ErrorMessage message="Error loading exercises" />;
 
   const roadmap = [
     {
       id: "notes-beginner",
-      lessons: noteExercises.map((ex) => ({
-        id: ex.id,
-        title: ex.name,
-        status: "unlocked" as const,
-      })),
+      lessons: lessons,
     },
   ];
 
@@ -37,16 +55,6 @@ export default function Notes() {
       <h1 className="text-3xl font-bold text-center mb-8">
         Note Training Roadmap
       </h1>
-
-      {stats ? (
-        <StatisticsCard
-          accuracy={stats.accuracy}
-          levelsCompleted={stats.levels_completed}
-          streak={stats.streak}
-        />
-      ) : (
-        <StatisticsCard accuracy={0} levelsCompleted={0} streak={0} />
-      )}
 
       {roadmap.map((section) => (
         <LessonRow key={section.id} lessons={section.lessons} />

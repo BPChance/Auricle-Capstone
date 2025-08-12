@@ -1,9 +1,9 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
-import { AudioLines } from "lucide-react";
-import { Music } from "lucide-react";
+import { AudioLines, Music, Loader2 } from "lucide-react";
+import { useExerciseProgress } from "@/hooks/useProgress";
 
 type ExerciseStep = {
   level: string;
@@ -28,9 +28,31 @@ type Props = {
 };
 
 export default function ExercisePlayer({ exercise }: Props) {
+  const {
+    progress,
+    loading,
+    startExercise,
+    completeExercise,
+    saveStepProgress,
+  } = useExerciseProgress(exercise.id);
+
   const [stepIndex, setStepIndex] = useState(0);
   const [selected, setSelected] = useState<string | null>(null);
   const [showFeedback, setShowFeedback] = useState(false);
+  const [isInitialized, setIsInitialized] = useState(false);
+
+  // Initialize step index from saved progress
+  useEffect(() => {
+    if (!loading && progress && !isInitialized) {
+      setStepIndex(progress.current_step || 0);
+      setIsInitialized(true);
+      
+      // Mark exercise as started if it's the first attempt
+      if (progress.status === "unlocked") {
+        startExercise();
+      }
+    }
+  }, [progress, loading, isInitialized, startExercise]);
 
   const step = exercise.steps[stepIndex] ?? null;
   const isLastStep = stepIndex === exercise.steps.length - 1;
@@ -62,9 +84,28 @@ export default function ExercisePlayer({ exercise }: Props) {
     }
   };
 
-  const handleCheck = () => {
-    if (selected !== null) {
+  const handleCheck = async () => {
+    if (selected !== null && step) {
       setShowFeedback(true);
+      
+      // Calculate if answer is correct right when checking
+      const answerIsCorrect = selected === step.answer;
+      
+      // Debug logging to see what's being compared
+      console.log('Answer check:', {
+        selected: selected,
+        expectedAnswer: step.answer,
+        isCorrect: answerIsCorrect,
+        stepIndex: stepIndex
+      });
+      
+      // Save step progress with the correct boolean
+      await saveStepProgress(stepIndex, answerIsCorrect, selected);
+      
+      // If this is the last step and it's correct, complete the exercise
+      if (answerIsCorrect && isLastStep) {
+        await completeExercise(exercise.category);
+      }
     }
   };
 
@@ -87,20 +128,6 @@ export default function ExercisePlayer({ exercise }: Props) {
     }
   };
 
-  if (!step) {
-    return (
-      <div className="min-h-screen flex flex-col items-center justify-center bg-[#0D0E52] text-[#FFC0CB] space-y-6">
-        <p className="text-2xl font-bold">Exercise Complete!</p>
-        <Link
-          href={`/train/${exercise.category}`}
-          className="border border-pink-400 px-6 py-2 rounded-md font-bold"
-        >
-          Done
-        </Link>
-      </div>
-    );
-  }
-
   const playScale = async () => {
     if (!step?.scaleAudio) return;
     const Tone = await import("tone");
@@ -113,8 +140,65 @@ export default function ExercisePlayer({ exercise }: Props) {
     }
   };
 
+  // Show loading state while fetching progress
+  if (loading) {
+    return (
+      <div className="min-h-screen flex flex-col items-center justify-center bg-[#4848A1] text-[#FFC0CB]">
+        <Loader2 className="animate-spin w-8 h-8" />
+        <p className="mt-4">Loading progress...</p>
+      </div>
+    );
+  }
+
+  // Check if exercise is locked
+  if (progress?.status === "locked") {
+    return (
+      <div className="min-h-screen flex flex-col items-center justify-center bg-[#4848A1] text-[#FFC0CB] space-y-6">
+        <p className="text-2xl font-bold">Exercise Locked</p>
+        <p>Complete previous exercises to unlock this one.</p>
+        <Link
+          href={`/train/${exercise.category}`}
+          className="border border-pink-400 px-6 py-2 rounded-md font-bold"
+        >
+          Back to Training
+        </Link>
+      </div>
+    );
+  }
+
+  if (!step) {
+    return (
+      <div className="min-h-screen flex flex-col items-center justify-center bg-[#4848A1] text-[#FFC0CB] space-y-6">
+        <p className="text-2xl font-bold">Exercise Complete!</p>
+        {progress?.status === "completed" && (
+          <p className="text-green-400">✓ Already Completed</p>
+        )}
+        <Link
+          href={`/train/${exercise.category}`}
+          className="border border-pink-400 px-6 py-2 rounded-md font-bold"
+        >
+          Done
+        </Link>
+      </div>
+    );
+  }
+
   return (
     <div className="min-h-screen flex flex-col items-center justify-center bg-[#2C2C71] text-[#FFC0CB] px-4 py-8 space-y-8">
+      {/* Progress indicator */}
+      <div className="w-full max-w-md">
+        <div className="flex justify-between text-sm mb-2">
+          <span>Step {stepIndex + 1} of {exercise.steps.length}</span>
+          <span>{Math.round(((stepIndex + 1) / exercise.steps.length) * 100)}% Complete</span>
+        </div>
+        <div className="w-full bg-[#1C1C3A] rounded-full h-2">
+          <div 
+            className="bg-[#FFC0CB] h-2 rounded-full transition-all duration-300"
+            style={{ width: `${((stepIndex + 1) / exercise.steps.length) * 100}%` }}
+          />
+        </div>
+      </div>
+
       <h2 className="text-2xl font-bold">{step.level}</h2>
 
       <div className="flex flex-col items-center gap-3">
@@ -235,7 +319,7 @@ export default function ExercisePlayer({ exercise }: Props) {
               href={`/train/${exercise.category}`}
               className="border border-[#FFC0CB] px-6 py-2 rounded-md inline-block"
             >
-              Done
+              Complete Exercise
             </Link>
           )}
         </div>
