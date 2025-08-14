@@ -31,7 +31,6 @@ type Props = {
 export default function ExercisePlayer({ exercise }: Props) {
   const {
     progress,
-    loading,
     startExercise,
     completeExercise,
     saveStepProgress,
@@ -44,7 +43,7 @@ export default function ExercisePlayer({ exercise }: Props) {
 
   // Initialize step index from saved progress
   useEffect(() => {
-    if (!loading && progress && !isInitialized) {
+    if (progress && !isInitialized) {
       setStepIndex(progress.current_step || 0);
       setIsInitialized(true);
 
@@ -53,7 +52,7 @@ export default function ExercisePlayer({ exercise }: Props) {
         startExercise();
       }
     }
-  }, [progress, loading, isInitialized, startExercise]);
+  }, [progress, isInitialized, startExercise]);
 
   const step = exercise.steps[stepIndex] ?? null;
   const isLastStep = stepIndex === exercise.steps.length - 1;
@@ -141,15 +140,6 @@ export default function ExercisePlayer({ exercise }: Props) {
     }
   };
 
-  // Show loading state while fetching progress
-  if (loading) {
-    return (
-      <div className="min-h-screen flex flex-col items-center justify-center bg-[#4848A1] text-[#FFC0CB]">
-        <Loader2 className="animate-spin w-8 h-8" />
-        <p className="mt-4">Loading progress...</p>
-      </div>
-    );
-  }
 
   // Check if exercise is locked
   if (progress?.status === "locked") {
