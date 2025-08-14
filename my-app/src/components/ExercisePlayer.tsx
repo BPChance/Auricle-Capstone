@@ -174,7 +174,7 @@ export default function ExercisePlayer({ exercise }: Props) {
       setSelected(null);
       setShowFeedback(false);
       setStepIndex(0);
-      
+
       // Small delay to ensure state is reset before tracking
       setTimeout(() => {
         startExercise(); // Track restart in database
@@ -185,10 +185,6 @@ export default function ExercisePlayer({ exercise }: Props) {
       <div className="min-h-screen flex flex-col items-center justify-center bg-[#2C2C71] text-[#FFC0CB] space-y-6 px-4">
         <div className="text-center space-y-3">
           <p className="text-3xl font-bold">Exercise Complete!</p>
-          <p className="text-lg opacity-80">{exercise.name}</p>
-          {progress?.status === "completed" && (
-            <p className="text-green-400">Previously Completed</p>
-          )}
         </div>
 
         <div className="flex gap-3">
