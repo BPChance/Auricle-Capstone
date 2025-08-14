@@ -166,27 +166,43 @@ export default function ExercisePlayer({ exercise }: Props) {
     );
   }
 
-  // When we're past the last step, show a completion screen with Restart
+  // When we're past the last step, show completion screen with Restart
   if (stepIndex >= exercise.steps.length) {
+    const handleRestart = async () => {
+      // Reset UI state first
+      setSelected(null);
+      setShowFeedback(false);
+      setStepIndex(0);
+      
+      // Small delay to ensure state is reset before tracking
+      setTimeout(() => {
+        startExercise(); // Track restart in database
+      }, 100);
+    };
+
     return (
-      <div className="min-h-screen flex flex-col items-center justify-center bg-[#2C2C71] text-[#FFC0CB] space-y-6">
-        <p className="text-2xl font-bold">Exercise Complete!</p>
+      <div className="min-h-screen flex flex-col items-center justify-center bg-[#2C2C71] text-[#FFC0CB] space-y-6 px-4">
+        <div className="text-center space-y-3">
+          <p className="text-3xl font-bold">Exercise Complete!</p>
+          <p className="text-lg opacity-80">{exercise.name}</p>
+          {progress?.status === "completed" && (
+            <p className="text-green-400">Previously Completed</p>
+          )}
+        </div>
 
         <div className="flex gap-3">
           <button
-            onClick={() => {
-              setSelected(null);
-              setShowFeedback(false);
-              setStepIndex(0);
-            }}
-            className="border-2 hover:border-[#4848A1] border-[#FFC0CB] hover:bg-[#FFC0CB] hover:text-[#4848A1] px-6 py-2 rounded-md"
+            onClick={handleRestart}
+            className="border-2 border-[#FFC0CB] px-6 py-3 rounded-md font-bold 
+                      hover:bg-[#FFC0CB] hover:text-[#2C2C71] transition"
           >
-            Restart
+            Retry
           </button>
 
           <Link
             href={`/train/${exercise.category}`}
-            className="border-2 hover:border-[#4848A1] border-[#FFC0CB] hover:bg-[#FFC0CB] hover:text-[#4848A1] px-6 py-2 rounded-md"
+            className="border-2 border-[#FFC0CB] px-6 py-3 rounded-md font-bold 
+                      hover:bg-[#FFC0CB] hover:text-[#2C2C71] transition"
           >
             Back to Training
           </Link>
@@ -326,21 +342,19 @@ export default function ExercisePlayer({ exercise }: Props) {
       {showFeedback && isCorrect && (
         <div className="space-y-3 mt-4 text-center">
           <p className="text-green-400 font-semibold">Correct!</p>
-          {!isLastStep ? (
-            <button
-              onClick={handleNext}
-              className="border border-[#FFC0CB] px-6 py-2 rounded-md"
-            >
-              Next
-            </button>
-          ) : (
-            <Link
-              href={`/train/${exercise.category}`}
-              className="border border-[#FFC0CB] px-6 py-2 rounded-md inline-block"
-            >
-              Complete Exercise
-            </Link>
-          )}
+          <button
+            onClick={() => {
+              if (!isLastStep) {
+                handleNext();
+              } else {
+                // Move to completion screen
+                setStepIndex(stepIndex + 1);
+              }
+            }}
+            className="border border-[#FFC0CB] px-6 py-2 rounded-md"
+          >
+            {isLastStep ? "Complete Exercise" : "Next"}
+          </button>
         </div>
       )}
     </div>

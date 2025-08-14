@@ -196,49 +196,88 @@ export const stepProgress = {
     isCompleted: boolean,
     answer?: string
   ) {
-    // Get current attempts
-    const { data: existing } = await supabase
-      .from("step_progress")
-      .select("attempts")
-      .eq("user_id", userId)
-      .eq("exercise_id", exerciseId)
-      .eq("step_index", stepIndex)
-      .single();
-
-    const attempts = (existing?.attempts || 0) + 1;
-
-    const { data, error } = await supabase
-      .from("step_progress")
-      .upsert({
-        user_id: userId,
-        exercise_id: exerciseId,
-        step_index: stepIndex,
-        is_completed: isCompleted,
-        last_answer: answer,
-        completed_at: isCompleted ? new Date().toISOString() : null,
-        attempts,
-      })
-      .select()
-      .single();
-
-    if (error) {
-      console.error("Error saving step progress:", error);
+    if (!userId || !exerciseId || stepIndex === undefined || stepIndex === null) {
+      console.error("Missing required parameters for step progress", {
+        userId,
+        exerciseId,
+        stepIndex
+      });
       return null;
     }
 
-    // Update completed steps count
-    if (isCompleted) {
-      const completedCount = await this.getCompletedCount(userId, exerciseId);
-      await exerciseProgress.update(userId, exerciseId, {
-        completed_steps: completedCount,
-        current_step: stepIndex + 1,
-      });
+    try {
+      // First, check if record exists
+      const { data: existing, error: fetchError } = await supabase
+        .from("step_progress")
+        .select("*")
+        .eq("user_id", userId)
+        .eq("exercise_id", exerciseId)
+        .eq("step_index", stepIndex)
+        .single();
+
+      let result;
+      
+      if (existing && !fetchError) {
+        // Record exists, update it
+        const { data, error } = await supabase
+          .from("step_progress")
+          .update({
+            is_completed: isCompleted,
+            last_answer: answer || null,
+            completed_at: isCompleted ? new Date().toISOString() : existing.completed_at,
+            attempts: (existing.attempts || 0) + 1,
+          })
+          .eq("user_id", userId)
+          .eq("exercise_id", exerciseId)
+          .eq("step_index", stepIndex)
+          .select()
+          .single();
+
+        if (error) {
+          console.error("Error updating step progress:", error);
+          return null;
+        }
+        result = data;
+      } else {
+        // Record doesn't exist, insert it
+        const { data, error } = await supabase
+          .from("step_progress")
+          .insert({
+            user_id: userId,
+            exercise_id: exerciseId,
+            step_index: stepIndex,
+            is_completed: isCompleted,
+            last_answer: answer || null,
+            completed_at: isCompleted ? new Date().toISOString() : null,
+            attempts: 1,
+          })
+          .select()
+          .single();
+
+        if (error) {
+          console.error("Error inserting step progress:", error);
+          return null;
+        }
+        result = data;
+      }
+
+      // Update completed steps count
+      if (isCompleted) {
+        const completedCount = await this.getCompletedCount(userId, exerciseId);
+        await exerciseProgress.update(userId, exerciseId, {
+          completed_steps: completedCount,
+          current_step: stepIndex + 1,
+        });
+      }
+
+      // Also record the answer for accuracy tracking
+      await exerciseProgress.recordAnswer(userId, exerciseId, isCompleted);
+
+      return result as StepProgress;
+    } catch (err) {
+      console.error("Error in saveStepProgress:", err);
+      return null;
     }
-
-    // Also record the answer for accuracy tracking
-    await exerciseProgress.recordAnswer(userId, exerciseId, isCompleted);
-
-    return data as StepProgress;
   },
 
   async getCompletedCount(userId: string, exerciseId: string) {
@@ -257,6 +296,8 @@ export const stepProgress = {
     return count || 0;
   }
 };
+
+
 
 // ============== ACCURACY STATS ==============
 export const accuracy = {
