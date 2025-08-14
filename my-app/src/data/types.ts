@@ -8,6 +8,7 @@ export type ExerciseStep = {
     | "Create";
   type: "multipleChoice" | "match" | "audioOnly" | "scaleContext" | "dualAudio";
   question: string;
+  context?: string;
   audio: string;
   audio2?: string;
   options: string[];

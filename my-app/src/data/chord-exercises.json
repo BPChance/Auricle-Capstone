@@ -1,35 +1,214 @@
 [
   {
     "id": "chord-1",
-    "name": "Major vs Minor (C)",
+    "name": "Remember",
     "difficulty": "beginner",
     "category": "chords",
     "unlockLevel": 1,
     "steps": [
       {
-        "level": "Remember",
-        "type": "multipleChoice",
-        "question": "Is this chord major or minor?",
-        "audio": "Cmaj",
-        "options": ["Major", "Minor"],
-        "answer": "Major"
+        "level": "Identify",
+        "type": "scaleContext",
+        "question": "A minor chord is built with the intervals 1, b3, 5, what notes does this Cmin chord consist of?",
+        "context": ["Cmin Scale", "C, D, Eb, F, G, Ab, Bb"],
+        "audio": "C4,D#4,G4",
+        "options": ["C, E, G", "C, Eb, G", "C, D, F"],
+        "answer": "C, Eb, G"
+      },
+      {
+        "level": "Identify",
+        "type": "scaleContext",
+        "question": "A major chord is build with the intervals 1, 3, 5, what notes does this Cmaj chord consist of?",
+        "context": ["Cmaj Scale", "C, D, E, F, G, A, B"],
+        "audio": "C4,E4,G4",
+        "options": ["C, F, G", "C, Eb, G", "C, E, G", "C, D, F"],
+        "answer": "C, E, G"
       }
     ]
   },
   {
     "id": "chord-2",
-    "name": "Chord Progressions I",
+    "name": "Remember",
     "difficulty": "beginner",
     "category": "chords",
     "unlockLevel": 2,
     "steps": [
       {
-        "level": "Apply",
+        "level": "Identify",
         "type": "multipleChoice",
-        "question": "What chord follows C in a I-IV-V progression?",
-        "audio": "Fmaj",
-        "options": ["Fmaj", "Gmaj", "Amin"],
-        "answer": "Fmaj"
+        "question": "Is this chord major or minor?",
+        "context": "1, 3, 5 intervals",
+        "audio": "C4,E4,G4",
+        "options": ["Major", "Minor"],
+        "answer": "Major"
+      },
+      {
+        "level": "Identify",
+        "type": "multipleChoice",
+        "question": "Is this chord major or minor?",
+        "context": "1, b3, 5 intervals",
+        "audio": "D4,F4,A4",
+        "options": ["Major", "Minor"],
+        "answer": "Minor"
+      }
+    ]
+  },
+  {
+    "id": "chord-3",
+    "name": "Remember",
+    "difficulty": "beginner",
+    "category": "chords",
+    "unlockLevel": 3,
+    "steps": [
+      {
+        "level": "Recall",
+        "type": "audioOnly",
+        "question": "Is this chord major or minor?",
+        "audio": "C4,E4,G4",
+        "options": ["Major", "Minor"],
+        "answer": "Major"
+      },
+      {
+        "level": "Recall",
+        "type": "audioOnly",
+        "question": "Is this chord major or minor?",
+        "audio": "C4,D#4,G4",
+        "options": ["Major", "Minor"],
+        "answer": "Minor"
+      }
+    ]
+  },
+  {
+    "id": "chord-4",
+    "name": "Understand",
+    "difficulty": "beginner",
+    "category": "chords",
+    "unlockLevel": 4,
+    "steps": [
+      {
+        "level": "Associating",
+        "type": "audioOnly",
+        "question": "Listen to the chord and select its quality.",
+        "context": "Major chords have a bright sound; minor chords have a darker sound.",
+        "audio": "C4,E4,G4",
+        "options": ["Major", "Minor", "Diminished"],
+        "answer": "Major"
+      },
+      {
+        "level": "Associating",
+        "type": "audioOnly",
+        "question": "Listen to the chord and select its quality.",
+        "context": "Major chords have a bright sound; minor chords have a darker sound.",
+        "audio": "D4,F4,A4",
+        "options": ["Major", "Minor", "Diminished"],
+        "answer": "Minor"
+      }
+    ]
+  },
+  {
+    "id": "chord-5",
+    "name": "Understand",
+    "difficulty": "beginner",
+    "category": "chords",
+    "unlockLevel": 5,
+    "steps": [
+      {
+        "level": "Classify",
+        "type": "chordAudio",
+        "question": "Listen to the chord and choose its quality. It may be inverted.",
+        "context": "Inversions change the bass note but the quality stays the same.",
+        "audio": "E4,G4,C5",
+        "options": ["Major", "Minor"],
+        "answer": "Major"
+      },
+      {
+        "level": "Classify",
+        "type": "chordAudio",
+        "question": "Listen to the chord and choose its quality. It may be inverted.",
+        "context": "Inversions change the bass note but the quality stays the same.",
+        "audio": "F4,A4,D5",
+        "options": ["Major", "Minor"],
+        "answer": "Minor"
+      }
+    ]
+  },
+  {
+    "id": "chord-6",
+    "name": "Understand",
+    "difficulty": "beginner",
+    "category": "chords",
+    "unlockLevel": 6,
+    "steps": [
+      {
+        "level": "Differentiate",
+        "type": "chordAudio",
+        "question": "Listen to the chord and choose its quality.",
+        "context": "Diminished chords have a tense, unstable sound; minor chords are dark but stable.",
+        "audio": "B3,D4,F4",
+        "options": ["Minor", "Diminished"],
+        "answer": "Diminished"
+      },
+      {
+        "level": "Interpret",
+        "type": "chordAudio",
+        "question": "Which description best matches the chord you hear?",
+        "context": "Major = bright/happy, Minor = sad/dark, Diminished = tense/unstable",
+        "audio": "A3,C4,E4",
+        "options": ["Bright and happy", "Sad and dark", "Tense and unstable"],
+        "answer": "Sad and dark"
+      }
+    ]
+  },
+  {
+    "id": "chord-7",
+    "name": "Apply",
+    "difficulty": "beginner",
+    "category": "chords",
+    "unlockLevel": 7,
+    "steps": [
+      {
+        "level": "Determine",
+        "type": "dualAudio",
+        "question": "Listen to the progression and identify the second chord.",
+        "context": "The first chord is C major, the second chord could be Major, Minor, or Diminished.",
+        "audio": "[C4,E4,G4]",
+        "audio2": "[A4,C4,E4]",
+        "options": ["Major", "Minor", "Diminished"],
+        "answer": "Minor"
+      },
+      {
+        "level": "Determine",
+        "type": "dualAudio",
+        "question": "Listen to the first two chords and choose the chord that best completes the progression.",
+        "audio": "[F3,A3,C4]",
+        "audio2": "[G3,B3,D4]",
+        "options": ["C4,E4,G4", "A3,C4,E4", "D3,F#3,A3"],
+        "answer": ["C4,E4,G4"]
+      }
+    ]
+  },
+  {
+    "id": "chord-8",
+    "name": "Analyze",
+    "difficulty": "beginner",
+    "category": "chords",
+    "unlockLevel": 8,
+    "steps": [
+      {
+        "level": "Deconstruct",
+        "type": "scaleContext",
+        "question": "Listen to the chord. Which set of notes matches what you heard?",
+        "audio": "C4,E4,G4",
+        "options": ["C,D,G", "C,E,G", "B,E,G"],
+        "answer": ["C, E, G"]
+      },
+      {
+        "level": "Deconstruct",
+        "type": "scaleContext",
+        "question": "Listen to the chord. Which set of notes matches what you heard?",
+        "audio": "D4,F4,A4",
+        "options": ["D,F,A", "C,E,G", "E,G,B"],
+        "answer": ["D, F, A"]
       }
     ]
   }

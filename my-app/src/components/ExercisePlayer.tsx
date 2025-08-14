@@ -9,6 +9,7 @@ type ExerciseStep = {
   level: string;
   type: string;
   question: string;
+  context?: string;
   audio: string;
   audio2?: string;
   options: string[];
@@ -276,6 +277,13 @@ export default function ExercisePlayer({ exercise }: Props) {
               <AudioLines className="text-[#FFC0CB]" />
             </div>
             <span className="font-semibold text-sm">Play audio</span>
+          </div>
+        )}
+        {step.context && (
+          <div className="bg-[#1C1C3A] p-3 rounded-md text-sm text-[#FFC0CB] text-center max-w-md">
+            {Array.isArray(step.context)
+              ? step.context.join(" • ")
+              : step.context}
           </div>
         )}
 
