@@ -1,1 +1,1 @@
-# Auricle-Capsone
+# Auricle-Capstone
